@@ -3,7 +3,7 @@
 ## print()
 输出，可以写表达式，类似console.log。
 ## input()
-输入，比如 name = input(“print your name:”)。 其中参数为提示内容，输入内容后点回车会把值传给name。
+输入，比如 name = input(“print your name:”)。 其中参数为提示内容，输入内容后点回车会把值传给name。（此时 name 的数据类型为字符串）
 # 基础
 ## 数据类型
 ### 布尔值
@@ -40,4 +40,40 @@ tips：
 	>>> 'growth rate: %d %%' % 7
 	'growth rate: 7 %'
 
-list 和 tuple
+## list（数组） 和 tuple（内容不能改）
+### list
+array = [1, 2, 3]
+len ( array )    				对应js array.lengh  获得list（数组）长度。
+array[-1]				获得 list 最后一个元素。
+array.insert(1, 'Jack’)		在第一位 插入 jack，之前的第一位变成第二位。
+array.pop()				推出最后一位。
+array.pop( i )				推出第 i 位。
+
+### tuple
+tuple和list非常类似，但是tuple一旦初始化就不能修改。
+tips：
+如果要定义一个空的tuple，可以写成()：
+	
+	>>> t = ()
+	>>> t
+	()
+
+要定义一个只有1个元素的tuple 要写成 (1, )，不然会被理解成 赋值。
+	
+	>>> t = (1,)
+	>>> t
+	(1,)
+
+注意 tuple 里面可以存 list ，而这个 list 里的值可以修改。是因为，无论如何修改，list 的地址不会变。
+
+## 条件语句
+注意：
+没有打括号 { } 都是冒号 :
+最好别写小括号。
+elif 对应js 中 else if
+
+	a = 10
+	if a > 5:
+	    print ("a>5")
+	else:
+	    print ("a<5")
