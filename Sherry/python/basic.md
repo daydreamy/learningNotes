@@ -13,6 +13,23 @@
 ### 布尔值
 True & False
 
+tips:
+
+	>>> int('123')
+	123
+	>>> int(12.34)
+	12
+	>>> float('12.34')
+	12.34
+	>>> str(1.23)
+	'1.23'
+	>>> str(100)
+	'100'
+	>>> bool(1)
+	True
+	>>> bool('')
+	False
+
 ## 字符串和编码
 ### 编码
 
@@ -50,21 +67,23 @@ tips：
 	'growth rate: 7 %'
 
 ## list（数组） 和 tuple（内容不能改）
-### list
+### list []
 
 list = [1, 2, 3]
 
 len ( list )    				对应js array.lengh  获得list（数组）长度。
 
-list[-1]				获得 list 最后一个元素。
+list[-1]					获得 list 最后一个元素。
 
 list.insert(1, 'Jack’)		在第一位 插入 jack，之前的第一位变成第二位。
+
+list.append(5)			类似 js push(5)
 
 list.pop()				推出最后一位。
 
 list.pop( i )				推出第 i 位。
 
-### tuple
+### tuple ()
 tuple和list非常类似，但是tuple一旦初始化就不能修改。
 
 tips：
@@ -105,7 +124,7 @@ while a>0 : 条件为 True 就继续做，False就跳出循环；同样有 break
 
 range(101)：生成 0-100 整数序列。
 
-## dict（字典 json）和 set（）
+## dict（字典 json）和 set（无序和无重复元素的集合）
 ### dict 和 json 的区别:
 dict[‘a‘] 如果不存在会报错，而不是 undefined。
 
@@ -153,3 +172,97 @@ set 会自动合并相同元素。所以可以做交集、并集。
 	>>> s1 | s2
 	{1, 2, 3, 4}
 
+# 函数
+## 使用 def 定义函数。
+## 函数的参数
+### 定义的函数的参数 都是用解构赋值给与 *初值* ，不然 使用函数时候如果传入参数不全会报错
+
+	def a (x, y):
+	    print (x)
+ 	   return
+	a(1)			# a() takes exactly 2 arguments (1 given)
+
+	def a (x, y = 0):
+	    print (x)
+ 	   return
+	a(1)	     		# 1
+
+	def a (x, y = 0, z = 0):
+	    print (x, z)
+ 	   return
+	a(1, z = 3 )	     		# 1, 3        但是这种操作需要知道形参的名字
+
+*初值* 如果是对象必须指向 **不变对象** 常用 none。通过下面例子可以看出，解构的对象并不是每次重新创建的，而是懒惰的。
+
+反例：
+
+	def add_end(L=[]):
+    		L.append('END')
+    		return L
+
+虽然
+
+	>>> add_end([1, 2, 3])
+	[1, 2, 3, 'END']
+	>>> add_end(['x', 'y', 'z'])
+	['x', 'y', 'z', 'END']
+
+但是
+
+	>>> add_end()
+	['END']
+	>>> add_end()
+	['END', 'END']
+	>>> add_end()
+	['END', 'END', 'END']
+
+正确做法：
+
+	def add_end(L=None):
+	    if L is None:
+	        L = []
+	    L.append('END')
+	    return L
+
+### 可变参数
+可以通过给参数 加上 * 是参数变成数量可变的参数，但是如果参数本身是一个可变参数（list／tuple） 在传入的时候加上 *就可以转化啦。
+
+	def calc(*numbers):
+	    sum = 0
+	    for n in numbers:
+	        sum = sum + n
+	    return sum
+
+	calc(1,2,3)			# 6
+	calc([1,2,3])			# TypeError: unsupported operand type(s) for +: 'int' and 'list'
+	calc(*[1,2,3])			# 6
+
+### 关键字参数  **（可传属性值对的参数）
+用于收集不限个数的属性值对，在参数前面加上双星 ** 
+
+	def person(name, age, **kw):
+   		print('name:', name, 'age:', age, 'other:', kw)
+
+	>>> person('Bob', 35, city='Beijing')
+	name: Bob age: 35 other: {'city': 'Beijing'}
+
+	>>> person('Adam', 45, gender='M', job='Engineer')
+	name: Adam age: 45 other: {'gender': 'M', 'job': 'Engineer'}
+
+	>>> extra = {'city': 'Beijing', 'job': 'Engineer'}
+	>>> person('Jack', 24, city=extra['city'], job=extra['job'])
+	name: Jack age: 24 other: {'city': 'Beijing', 'job': 'Engineer'}
+	
+
+### 命名关键字参数 *，obj，...
+用于限制关键字参数的名字。
+
+*我没实验成功，这个例子报错了：*
+
+	def person(name, age, *, city='Beijing', job):
+	    print(name, age, city, job)
+
+	person('Jack', 24, job='Engineer')
+
+
+# 高级特性
