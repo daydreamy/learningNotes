@@ -42,12 +42,12 @@ tips：
 
 ## list（数组） 和 tuple（内容不能改）
 ### list
-array = [1, 2, 3]
-len ( array )    				对应js array.lengh  获得list（数组）长度。
-array[-1]				获得 list 最后一个元素。
-array.insert(1, 'Jack’)		在第一位 插入 jack，之前的第一位变成第二位。
-array.pop()				推出最后一位。
-array.pop( i )				推出第 i 位。
+list = [1, 2, 3]
+len ( list )    				对应js array.lengh  获得list（数组）长度。
+list[-1]				获得 list 最后一个元素。
+list.insert(1, 'Jack’)		在第一位 插入 jack，之前的第一位变成第二位。
+list.pop()				推出最后一位。
+list.pop( i )				推出第 i 位。
 
 ### tuple
 tuple和list非常类似，但是tuple一旦初始化就不能修改。
@@ -68,7 +68,7 @@ tips：
 
 ## 条件语句
 注意：
-没有打括号 { } 都是冒号 :
+没有大括号 { } 都是冒号 :
 最好别写小括号。
 elif 对应js 中 else if
 
@@ -77,3 +77,53 @@ elif 对应js 中 else if
 	    print ("a>5")
 	else:
 	    print ("a<5")
+
+## 循环
+for i in list：其中 i 是 list 的各项，不是index。
+while True/False : 如果为 True 就继续做。False就跳出循环；同样有 break 和 continue。
+range(101)：生成 0-100 整数序列。
+
+## dict（字典 json）和 set（）
+### dict 和 json 的区别:
+dict[‘a‘] 如果不存在会报错，而不是 undefined。
+两种办法判断是否存在：
+
+	>>> ‘a’ in dict
+	False
+
+或者
+
+	>>> dict.get(”a“, ”不存在喔”)
+	>>>  不存在喔      	  # 如果不存在，返回第二个参数 如果不写第二个参数，返回空
+
+	>>> dict.get(‘a’)
+	>>>          		# 如果不存在，返回空
+
+### set 无序和无重复元素的集合
+
+在 python2.7 中
+	
+	>>> s = set([1,2,3])
+	>>> s
+	set([1, 2, 3])
+
+在 python3 中
+
+	>>> s = set([1,2,3])
+	>>> s
+	{1, 2, 3}
+
+Tips:
+set 没有 index。所以 s[0] 会报错。（TypeError: 'set' object does not support indexing
+）
+通过 add(value) 添加元素。
+通过 remove(value) 删除元素。
+set 会自动合并相同元素。所以可以做交集、并集。
+
+	>>> s1 = set([1, 2, 3])
+	>>> s2 = set([2, 3, 4])
+	>>> s1 & s2
+	{2, 3}
+	>>> s1 | s2
+	{1, 2, 3, 4}
+
