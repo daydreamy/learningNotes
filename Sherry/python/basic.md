@@ -122,8 +122,6 @@ for i in list：其中 i 是 list 的各项，不是index。
 
 while a>0 : 条件为 True 就继续做，False就跳出循环；同样有 break 和 continue。
 
-range(101)：生成 0-100 整数序列。
-
 ## dict（字典 json）和 set（无序和无重复元素的集合）
 ### dict 和 json 的区别:
 dict[‘a‘] 如果不存在会报错，而不是 undefined。
@@ -302,7 +300,7 @@ set 会自动合并相同元素。所以可以做交集、并集。
 
 问题来了：
 
-一、如何便利一个数组 arr 还想得到每一位的 key ，还不想用 arr.index(key) 方法呢？答：使用 enumerate 方法可以转化成 *索引-元素对* 如果脱离 for in 单独用，没发返回转换后的东西。
+一、如何便利一个数组 arr 还想得到每一位的 key ，还不想用 arr.index(key) 方法呢？答：使用 enumerate 方法可以转化成 *索引-元素对* 如果脱离 for in 单独用，没法返回转换后的东西。
 
 	>>> for i, value in enumerate(['A', 'B', 'C']):
 		...     print(i, value)
@@ -321,4 +319,37 @@ set 会自动合并相同元素。所以可以做交集、并集。
 	>>> isinstance(123, Iterable) # 整数是否可迭代
 	False
 
+## 生成列表（数组）range 的各种用法
+	
+正常：
 
+	range(3)
+	# [0, 1, 2]
+
+选择初始值：
+
+	range(1,3)
+	# [1, 2]
+
+使用列表表达式，设置返回数字的算法，下例中 x+x 就是为返回值设定的算法：
+
+	[x+x for x in range(3)]
+	# [0, 2, 4]
+
+
+	# 当然也可以穿入函数
+
+	def demo(z):
+   		 print z
+	[demo(x) for x in range(3)]
+	# [1, 2, 3]
+
+设置条件，虽然复杂条件可以写到函数里，但是简单的条件可就不用这么麻烦喽：
+
+	[x+x for x in range(3) if x%2 == 0]
+	# [0, 4]
+
+还可以更复杂，更复杂，但是不想知道了，无论多么复杂我在外面写个函数肯定都能解决。
+
+
+	
