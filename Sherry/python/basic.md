@@ -266,3 +266,59 @@ set 会自动合并相同元素。所以可以做交集、并集。
 
 
 # 高级特性
+## 切片[:] ( 类似 js 里 slice ，但是要厉害多了)
+	arr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+	arr[:3]      	#  [0, 1, 2,]  			 取前三个。
+	arr[-3:] 	 	#  [7, 8, 9]			 取后三个
+	arr[1:]	 		#  [3, 4, 5, 6, 7, 8] 	 	从第一取到最后。
+	arr[-3:-2]		#  [7]				取倒数第三个到倒数第二个（不包含倒数第二个）
+ 	arr[1:3]  	 	#  [1, 2]				 取第一 到第三个（不包含第三个）。
+	arr[:6:2]		#  [0, 2, 4]			前 6 位，每隔 2 位取一位
+
+## 遍历
+获取数组中一个元素 （value） 的位置：
+
+	arr.index(value)
+	
+唯一方法 for in，和js区别：
+
+如果在便利一个对象 { } ，可以写成
+
+	obj = {'a': 11, 'b': 22, 'c': 33}
+
+	for i in obj:
+   		 print (i)
+	# 输出 a,  c, b
+
+	for i in obj.values():
+    		print (i)
+	# 输出 11, 33, 22
+
+	for i,j in obj.items():
+    		print (i,j)
+	# 输出  'a', 11, 'c', 33, ‘b’, 22
+
+因为dict的存储不是按照list的方式顺序排列，所以，迭代出的结果顺序很可能不一样。堆内存的存储空间不一定是连续的。
+
+问题来了：
+
+一、如何便利一个数组 arr 还想得到每一位的 key ，还不想用 arr.index(key) 方法呢？答：使用 enumerate 方法可以转化成 *索引-元素对* 如果脱离 for in 单独用，没发返回转换后的东西。
+
+	>>> for i, value in enumerate(['A', 'B', 'C']):
+		...     print(i, value)
+		...
+		0 A
+		1 B
+		2 C
+
+判断一个对象是否能被遍历（迭代），通过collections 里的 Iterable 模块来判断。isinstance 是用来判断类型的，isinstance(A, B) 对应 js 里 A instanceof B。
+
+	>>> from collections import Iterable
+	>>> isinstance('abc', Iterable) # str是否可迭代
+	True
+	>>> isinstance([1,2,3], Iterable) # list是否可迭代
+	True
+	>>> isinstance(123, Iterable) # 整数是否可迭代
+	False
+
+
