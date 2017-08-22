@@ -118,6 +118,8 @@ elif 对应js 中 else if
 	    print ("a<5")
 
 ## 循环
+在 py 中没有和 js 一样的 for (var I=0, I<10; I++){} 这种循环只有两种：for in 和 while
+
 for i in list：其中 i 是 list 的各项，不是index。
 
 while a>0 : 条件为 True 就继续做，False就跳出循环；同样有 break 和 continue。
@@ -351,5 +353,55 @@ set 会自动合并相同元素。所以可以做交集、并集。
 
 还可以更复杂，更复杂，但是不想知道了，无论多么复杂我在外面写个函数肯定都能解决。
 
+## 生成器 generator
+背景：通过列表生成式（range），可以一下生成很长的列表，但是不一定这么长都能用得到啊，能不能用多少，算出来多少呢？于是就有了gnenrator。
 
+生成 generator 的两种方法：
+
+	g = (x+x for x in range(10))
+	# g 就是一个generator了。
 	
+	def demo():
+    		i = 0
+    		while i<10:
+        			yield i
+       			i = i+1
+	g = demo()
+	# g 就是一个 generator 了。
+
+想获得这个 generator 的下一个值，使用可以使用 next(g) 来得到，但是到最后一位以后继续调用会报错。所以只使用 for in 来得到他的所有值。( 在js中 使用 for of 来遍历generator的值们 )
+
+## 迭代器
+可以从 collection 中 import 出两个对象，分别是 Iterable 和 Iterator，可以通过 isinstance(a,b) 来看 a 是否是 b 的实例。
+
+Iterable 是一个有限长度的。I
+
+凡是可作用于for循环的对象都是 Iterable 类型；
+
+凡是可作用于next()函数的对象都是 Iterator 类型，它们表示一个惰性计算的序列，他的每一个下一步的结果都是当下计算的；
+
+# 函数式编程
+## 高阶函数
+
+
+### reduce 
+f 接受两个参数。
+
+	reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
+
+### map
+f 接受一个参数
+
+	map(f, [x1, x2, x3, x4]) = [f(x1), f(x2),f(x3) ,f(x4) ]
+
+### filter
+f 接受一个参数，根据参数进行判断，返回真就留下。
+
+	filter(f, [x1, x2, x3, x4])
+
+### sorted
+三个参数 数组、reverse（反序）、key。key传入一个f，f会依次执行数组中每一位，并根据结果进行排序。
+
+	z = sorted([1,3,2,11,6], reverse =True, key = f )
+	
+## 匿名函数
