@@ -1,4 +1,4 @@
-requestAnimationFrame 和 tween
+# requestAnimationFrame 和 tween
 ## 序言 requestAnimationFrame 厉害的地方
 HTML5标准规定了setTimeout()的第二个参数的最小值（最短间隔），不得低于4毫秒，如果低于这个值，就会自动增加。在此之前，老版本的浏览器都将最短间隔设为10毫秒。另外，对于那些DOM的变动（尤其是涉及页面重新渲染的部分），通常不会立即执行，而是每16毫秒执行一次。这时使用requestAnimationFrame()的效果要好于setTimeout()。
 
@@ -76,7 +76,7 @@ s = c*f(t) + b
 ```
 f(t) 为  [1 - (1-t/d)^4] ，可分解为 (1-t/d)^4 和 1-t/d，对应下图。
 
-图片图片图片图片图片
+![image](https://raw.githubusercontent.com/Sherryer/Sherry-npm/master/static/images/show-react-apple-menu.gif)
 
 *可得*：
 ```
