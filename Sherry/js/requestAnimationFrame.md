@@ -74,7 +74,7 @@ s = c * [1 - (1-t/d)^4] + b
 ```
 s = c*f(t) + b
 ```
-f(t) 为  [1 - (1-t/d)^4] ，可分解为 (1-t/d)^4 和 1-t/d，对应下图。
+f(t) 为  [1 - (1-t/d)^4] ，可分解为 (1-t/d)^4 --> 1-t/d，对应下图。
 
 ![image](https://raw.githubusercontent.com/daydreamy/learningNotes/master/Sherry/static/f(x)01.png)
 
