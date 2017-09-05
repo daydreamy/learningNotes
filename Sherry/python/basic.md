@@ -404,4 +404,81 @@ f 接受一个参数，根据参数进行判断，返回真就留下。
 
 	z = sorted([1,3,2,11,6], reverse =True, key = f )
 	
-## 匿名函数
+## 匿名函数 lambda（λ）读作 [ˈlæmdə]
+写法：lambda 参数 ：返回值
+
+	lambda x: x * x
+
+## 装饰器 decorator
+在 python 中的装饰器只有类似 js 中对class的装饰器，没有类似对 class里一个方法的装饰器；但是在 python 中由于很多方法的判断逻辑依赖方法名 __ name__，所以在使用装饰漆时候要重写方法名。
+
+	import functools
+
+	def log(func):
+	    @ functools.wraps(func)
+ 	   def demo(*args, **kw):
+ 	       print('call %s():' % func.__name__)
+ 	       return func(*args, **kw)
+	    return demo
+
+使用 import functools 里的 @ functools.wraps(func) 来重写方法名。
+
+## 偏函数
+当函数的参数个数太多，需要简化时，使用functools.partial可以创建一个新的函数（偏函数），这个新函数可以固定住原函数的部分参数，从而在调用时更简单。
+
+	>>> import functools
+	>>> int2 = functools.partial(int, base=2)
+	>>> int2('1000000')
+
+# 模块
+## 使用模块
+### 模块的书写规范
+from 模块 import 方法
+
+### 安装第三方模块
+```
+npm install
+npm list			# 查看有哪些模块
+npm freeze		# 查看有哪些安装的模块
+```
+
+# 面向对象编程
+## 类和实例
+类：
+
+Class 类名 （ 从哪继承来的，一般是 object ）
+
+	__init__ 方法 类似 constructor( self 对应this , arg ... )
+
+	其他方法。。。
+
+```
+class Student(object):
+
+    def __init__(self, name, score):
+        self.name = name
+        self.score = score
+        self.__preName = name			# 私有变量
+
+    def print_score(self):
+        print('%s: %s' % (self.name, self.score))
+```
+
+实例：
+student1 = Student( “name”, “80”)
+
+## 私有变量
+上一个例子中 __preName 就是一个私有变量，无法通过  student1. __preName 访问到。若想访问：
+```
+student1._Student__preName
+```
+*并没有真正的访问不到、无法修改的私有变量*，一切靠自觉。
+
+
+
+# 调试
+```
+
+if __name__ == '__main__':
+	print(1)    # 就可以调用各种方法了
+```
