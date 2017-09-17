@@ -83,19 +83,24 @@ list.pop()				推出最后一位。
 
 list.pop( i )				推出第 i 位。
 
+#### tips
+```
+解构赋值 a, b, c = [1, 2, 3] 对应 js var [a, b, c] = [1, 2, 3]
+```
+
 ### tuple ()
 tuple和list非常类似，但是tuple一旦初始化就不能修改。
 
 tips：
 
 如果要定义一个空的tuple，可以写成()：
-	
+
 	>>> t = ()
 	>>> t
 	()
 
 要定义一个只有1个元素的tuple 要写成 (1, )，不然会被理解成 赋值。
-	
+
 	>>> t = (1,)
 	>>> t
 	(1,)
@@ -118,7 +123,7 @@ elif 对应js 中 else if
 	    print ("a<5")
 
 ## 循环
-在 py 中没有和 js 一样的 for (var I=0, I<10; I++){} 这种循环只有两种：for in 和 while
+在 py 中没有和 js 一样的 for (var I=0, I<10; I++){} 这种循环。只有两种：for in 和 while
 
 for i in list：其中 i 是 list 的各项，不是index。
 
@@ -144,7 +149,7 @@ dict[‘a‘] 如果不存在会报错，而不是 undefined。
 ### set 无序和无重复元素的集合
 
 在 python2.7 中
-	
+
 	>>> s = set([1,2,3])
 	>>> s
 	set([1, 2, 3])
@@ -238,7 +243,7 @@ set 会自动合并相同元素。所以可以做交集、并集。
 	calc(*[1,2,3])			# 6
 
 ### 关键字参数  **（可传属性值对的参数）
-用于收集不限个数的属性值对，在参数前面加上双星 ** 
+用于收集不限个数的属性值对，在参数前面加上双星 **
 
 	def person(name, age, **kw):
    		print('name:', name, 'age:', age, 'other:', kw)
@@ -252,7 +257,7 @@ set 会自动合并相同元素。所以可以做交集、并集。
 	>>> extra = {'city': 'Beijing', 'job': 'Engineer'}
 	>>> person('Jack', 24, city=extra['city'], job=extra['job'])
 	name: Jack age: 24 other: {'city': 'Beijing', 'job': 'Engineer'}
-	
+
 
 ### 命名关键字参数 *，obj，...
 用于限制关键字参数的名字。
@@ -279,7 +284,7 @@ set 会自动合并相同元素。所以可以做交集、并集。
 获取数组中一个元素 （value） 的位置：
 
 	arr.index(value)
-	
+
 唯一方法 for in，和js区别：
 
 如果在便利一个对象 { } ，可以写成
@@ -322,7 +327,7 @@ set 会自动合并相同元素。所以可以做交集、并集。
 	False
 
 ## 生成列表（数组）range 的各种用法
-	
+
 正常：
 
 	range(3)
@@ -360,7 +365,7 @@ set 会自动合并相同元素。所以可以做交集、并集。
 
 	g = (x+x for x in range(10))
 	# g 就是一个generator了。
-	
+
 	def demo():
     		i = 0
     		while i<10:
@@ -384,7 +389,7 @@ Iterable 是一个有限长度的。I
 ## 高阶函数
 
 
-### reduce 
+### reduce
 f 接受两个参数。
 
 	reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
@@ -403,7 +408,7 @@ f 接受一个参数，根据参数进行判断，返回真就留下。
 三个参数 数组、reverse（反序）、key。key传入一个f，f会依次执行数组中每一位，并根据结果进行排序。
 
 	z = sorted([1,3,2,11,6], reverse =True, key = f )
-	
+
 ## 匿名函数 lambda（λ）读作 [ˈlæmdə]
 写法：lambda 参数 ：返回值
 
@@ -474,6 +479,20 @@ student1._Student__preName
 ```
 *并没有真正的访问不到、无法修改的私有变量*，一切靠自觉。
 
+## 继承和多态
+### 继承
+```
+class Animail(object):
+	def run():
+		print("haha")
+
+class dog(Animail):
+	pass
+
+dog.run()
+```
+
+# 高级面向对象编程
 
 
 # 调试
