@@ -83,6 +83,8 @@ list.pop()				推出最后一位。
 
 list.pop( i )				推出第 i 位。
 
+list.index(“a”)			返回 “a” 在 list 中的位置
+
 #### tips
 ```
 解构赋值 a, b, c = [1, 2, 3] 对应 js var [a, b, c] = [1, 2, 3]
@@ -131,7 +133,13 @@ while a>0 : 条件为 True 就继续做，False就跳出循环；同样有 break
 
 ## dict（字典 json）和 set（无序和无重复元素的集合）
 ### dict 和 json 的区别:
-dict[‘a‘] 如果不存在会报错，而不是 undefined。
+	dic = { a:1, b:2 ,c:3}
+	dic.values				# [‘a’, ‘b’, ‘c’]
+	dic.values				# [1, 2, 3]
+	dic.items()				# [(‘a’, 1), (‘b’, 2), (‘c’, 3)]
+	dict[‘a‘] 如果不存在会报错，而不是 undefined。
+
+
 
 两种办法判断是否存在：
 
@@ -285,9 +293,14 @@ set 会自动合并相同元素。所以可以做交集、并集。
 
 	arr.index(value)
 
-唯一方法 for in，和js区别：
+Py中遍历只有唯一方法 for in，和js不同：
 
-如果在便利一个对象 { } ，可以写成
+Js中
+for i in 对象 i 为对象的每一位 key 值
+for i of 对象 i 为对象的每一位 value 值。
+
+回到 py
+如果在遍历一个对象 { } ，可以写成
 
 	obj = {'a': 11, 'b': 22, 'c': 33}
 
@@ -374,7 +387,7 @@ set 会自动合并相同元素。所以可以做交集、并集。
 	g = demo()
 	# g 就是一个 generator 了。
 
-想获得这个 generator 的下一个值，使用可以使用 next(g) 来得到，但是到最后一位以后继续调用会报错。所以只使用 for in 来得到他的所有值。( 在js中 使用 for of 来遍历generator的值们 )
+想获得这个 generator 的下一个值，使用可以使用 next(g) 来得到，但是到最后一位以后继续调用会报错。所以只使用 for in 来得到他的所有值。( 在js中 使用 for of 来遍历generator、Set 的值们 )
 
 ## 迭代器
 可以从 collection 中 import 出两个对象，分别是 Iterable 和 Iterator，可以通过 isinstance(a,b) 来看 a 是否是 b 的实例。
@@ -493,11 +506,55 @@ dog.run()
 ```
 
 # 高级面向对象编程
+## __slots__ 插槽
+作用：给 一个class 规定他的实例只允许有哪些属性和方法，不许再添加新的方法（对其子类不生效）
 
+```
+class Student(Object):
+	__slots__ = (‘name’)
+
+s = Student()
+s.age = 1		# AttributeError: 'Student' object has no attribute 'age'
+```
+
+## grtter @ propoty
+Py 中实现 getter 和 setter 方法为，给一个 方法 名字上 加上装饰器 @ propoty 。
+```
+class Student(object):
+
+    @ property
+    def birth(self):				# 把 birth 方法变为属性。birth ，对应方法为 getter
+        return self._birth
+
+    @ birth.setter				# 设置 birth 的 setter
+    def birth(self, value):
+        self._birth = value
+```
+
+## 多重继承
+新类可以继承多个类
+```
+class Bird(object):
+    def fly(self):
+        print('i can fly')
+
+class Dog(object):
+    def run(self):
+        print('i can run')
+
+class BirdDog(Bird, Dog):
+    def speak(self):
+        print('i can speak')
+
+monster = BirdDog()
+monster.fly()
+monster.run()
+```
+
+[还有一些高级用法略](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143186738532805c392f2cc09446caf3236c34e3f980f000)
 
 # 调试
 ```
-
 if __name__ == '__main__':
 	print(1)    # 就可以调用各种方法了
 ```
